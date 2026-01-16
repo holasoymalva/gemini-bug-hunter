@@ -15,12 +15,26 @@ import Scanner from '../engine/scanner/scanner.js';
 import RiskCalculator from '../engine/risk/calculator.js';
 import ConsoleReporter from '../reporter/console.js';
 
+import displayWelcome from './welcome.js';
+
 const program = new Command();
 
 program
     .name('gbh')
     .description('🛡️  Gemini Bug Hunter - AI-Powered Security Vulnerability Scanner')
-    .version('1.0.0');
+    .version('1.0.0')
+    .hook('preAction', async (thisCommand, actionCommand) => {
+        // Solo mostrar animación si es el comando principal o 'doctor'
+        if (thisCommand.args.length === 0 || actionCommand.name() === 'doctor') {
+            // Podemos decidir si mostrarlo siempre o solo en ciertos casos
+            // Para esta demo, lo mostraremos en comandos interactivos principales
+        }
+    });
+
+// Custom help handler to show welcome screen
+if (process.argv.length <= 2) {
+    await displayWelcome();
+}
 
 /**
  * Scan Command

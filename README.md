@@ -4,7 +4,7 @@
   ### AI-Powered Security Vulnerability Hunter (CLI)
 </div>
 
-> **Gemini Bug Hunter** is an AI-first CLI tool that helps developers **find, understand, and fix security vulnerabilities** in their codebases using **Gemini 3 API as the core intelligence engine**.
+> **Gemini Bug Hunter** is an AI-first CLI tool that helps developers **find, understand, and fix security vulnerabilities** in their codebases using **Gemini 2.5 Flash (Next Gen) as the core intelligence engine**.
 
 Inspired by tools like **Gemini-CLI** and **Claude-Code**, Gemini Bug Hunter brings **ethical hacking and AppSec workflows** directly into the developer terminal.
 
@@ -18,7 +18,7 @@ Security tools are often:
 * Too complex
 * Too disconnected from developer workflows
 
-**Gemini Bug Hunter** solves this by using **Gemini 3 as the main reasoning engine** to:
+**Gemini Bug Hunter** solves this by using **Gemini 2.5 (Next Gen) as the main reasoning engine** to:
 
 * Understand code context
 * Detect vulnerabilities
@@ -40,7 +40,8 @@ All vulnerability analysis, risk reasoning, and fix generation are driven by Gem
 
 * **Node.js** (v18+)
 * **JavaScript (ES2022+)**
-* **Gemini 3 API** (Primary Analysis Engine)
+* **Gemini 2.5 Flash** (Next Gen Analysis Engine)
+* **Premium CLI Experience** (ASCII Art, Animations, Gradients)
 * CLI Framework: `commander`
 * Output Styling: `chalk`, `cli-table3`, `boxen`
 * File traversal: `glob`
@@ -54,6 +55,7 @@ All vulnerability analysis, risk reasoning, and fix generation are driven by Gem
 
 - Node.js 18 or higher
 - Gemini API Key ([Get one here](https://aistudio.google.com/app/apikey))
+- **Gemini Model**: Uses `gemini-2.5-flash` by default (configurable)
 
 ### Setup
 
@@ -132,7 +134,7 @@ gbh explain "XSS"
 
 ---
 
-## 🤖 Gemini 3 Integration
+## 🤖 Gemini 2.5 Integration
 
 ### System Prompt
 
@@ -302,7 +304,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## 🙏 Acknowledgments
 
-- Powered by **Google Gemini 3 API**
+- Powered by **Google Gemini 2.5 Flash**
 - Inspired by **OWASP Top 10**
 - Built for the developer community
 
