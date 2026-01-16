@@ -1,42 +1,60 @@
 {
-  "name": "gemini-bug-hunter",
-  "version": "1.0.0",
-  "description": "AI-Powered Security Vulnerability Hunter using Gemini 3 API",
-  "main": "index.js",
-  "type": "module",
-  "bin": {
-    "gbh": "./cli/index.js"
-  },
-  "scripts": {
-    "start": "node cli/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch cli/index.js"
-  },
-  "keywords": [
-    "security",
-    "vulnerability",
-    "scanner",
-    "ai",
-    "gemini",
-    "cli",
-    "appsec",
-    "ethical-hacking"
-  ],
-  "author": "holasoymalva",
-  "license": "MIT",
-  "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "boxen": "^7.1.1",
-    "chalk": "^5.3.0",
-    "cli-table3": "^0.6.3",
-    "commander": "^12.0.0",
-    "dotenv": "^16.4.1",
-    "figlet": "^1.9.4",
-    "glob": "^10.3.10",
-    "gradient-string": "^3.0.0",
-    "ora": "^8.0.1"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+    "name": "gemini-bug-hunter",
+    "version": "1.0.0",
+    "description": "AI-Powered Security Vulnerability Hunter using Gemini 2.5 Flash",
+    "main": "cli/index.js",
+    "type": "module",
+    "bin": {
+        "gbh": "./cli/index.js"
+    },
+    "files": [
+        "cli/",
+        "config/",
+        "engine/",
+        "reporter/",
+        "LICENSE",
+        "README.md"
+    ],
+    "scripts": {
+        "start": "node cli/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "node --watch cli/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/holasoymalva/gemini-bug-hunter.git"
+    },
+    "keywords": [
+        "security",
+        "vulnerability",
+        "scanner",
+        "ai",
+        "gemini",
+        "cli",
+        "appsec",
+        "ethical-hacking",
+        "sast",
+        "code-analysis"
+    ],
+    "author": "holasoymalva",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/holasoymalva/gemini-bug-hunter/issues"
+    },
+    "homepage": "https://github.com/holasoymalva/gemini-bug-hunter#readme",
+    "dependencies": {
+        "@google/generative-ai": "^0.21.0",
+        "boxen": "^7.1.1",
+        "chalk": "^5.3.0",
+        "cli-table3": "^0.6.3",
+        "commander": "^12.0.0",
+        "dotenv": "^16.4.1",
+        "figlet": "^1.9.4",
+        "glob": "^10.3.10",
+        "gradient-string": "^3.0.0",
+        "ora": "^8.0.1"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
 }

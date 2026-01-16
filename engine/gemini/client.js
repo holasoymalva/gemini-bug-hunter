@@ -4,10 +4,10 @@
  */
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import dotenv from 'dotenv';
+import { loadEnv } from '../utils/env-loader.js';
 import { DEFAULT_CONFIG } from '../../config/default.js';
 
-dotenv.config();
+loadEnv();
 
 class GeminiClient {
     constructor() {
