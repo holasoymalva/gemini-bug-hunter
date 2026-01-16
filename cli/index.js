@@ -44,10 +44,11 @@ program
 
             // Test connection
             spinner.text = 'Testing Gemini API connection...';
-            const connected = await gemini.testConnection();
-            if (!connected) {
+            const connectionResult = await gemini.testConnection();
+            if (!connectionResult.success) {
                 spinner.fail('Failed to connect to Gemini API');
-                reporter.displayError('Please check your GEMINI_API_KEY in .env file');
+                reporter.displayError(connectionResult.error || 'Connection failed');
+                reporter.displayWarning('Check your GEMINI_API_KEY and model configuration in .env file');
                 process.exit(1);
             }
             spinner.succeed('Connected to Gemini API');
@@ -154,11 +155,17 @@ program
             // Test connection
             try {
                 const gemini = new GeminiClient();
-                const connected = await gemini.testConnection();
-                if (connected) {
+                const result = await gemini.testConnection();
+                if (result.success) {
                     console.log(`${chalk.green('✓')} Gemini API connection successful`);
+                    console.log(chalk.gray(`   Model: ${gemini.config.model}`));
                 } else {
                     console.log(`${chalk.red('✗')} Gemini API connection failed`);
+                    console.log(chalk.yellow(`   Error: ${result.error}`));
+                    console.log(chalk.gray('   Troubleshooting:'));
+                    console.log(chalk.gray('   - Verify your API key at: https://aistudio.google.com/app/apikey'));
+                    console.log(chalk.gray('   - Check if the model exists (current: ' + gemini.config.model + ')'));
+                    console.log(chalk.gray('   - Try changing GEMINI_MODEL in .env to: gemini-pro'));
                 }
             } catch (error) {
                 console.log(`${chalk.red('✗')} Gemini API error: ${error.message}`);

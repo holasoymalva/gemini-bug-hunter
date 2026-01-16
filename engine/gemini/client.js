@@ -235,9 +235,13 @@ Instructions:
         try {
             await this.initialize();
             const result = await this.model.generateContent('Hello, respond with "OK"');
-            return result.response.text().includes('OK');
+            const text = result.response.text();
+            return { success: true, message: text };
         } catch (error) {
-            return false;
+            return {
+                success: false,
+                error: error.message
+            };
         }
     }
 }
