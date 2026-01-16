@@ -1,1 +1,1 @@
-# gemini-bug-bounty
+# gemini-bug-hunter
