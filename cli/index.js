@@ -14,6 +14,9 @@ import GeminiClient from '../engine/gemini/client.js';
 import Scanner from '../engine/scanner/scanner.js';
 import RiskCalculator from '../engine/risk/calculator.js';
 import ConsoleReporter from '../reporter/console.js';
+import { loadEnv, getGlobalConfigPath } from '../engine/utils/env-loader.js';
+
+loadEnv();
 
 import displayWelcome from './welcome.js';
 
@@ -23,11 +26,11 @@ program
     .name('gbh')
     .description('🛡️  Gemini Bug Hunter - AI-Powered Security Vulnerability Scanner')
     .version('1.0.0')
+    .option('--welcome', 'Show welcome animation')
     .hook('preAction', async (thisCommand, actionCommand) => {
-        // Solo mostrar animación si es el comando principal o 'doctor'
-        if (thisCommand.args.length === 0 || actionCommand.name() === 'doctor') {
-            // Podemos decidir si mostrarlo siempre o solo en ciertos casos
-            // Para esta demo, lo mostraremos en comandos interactivos principales
+        // Show animation if --welcome flag is used or if running 'doctor'
+        if (thisCommand.opts().welcome || actionCommand.name() === 'doctor') {
+            await displayWelcome();
         }
     });
 
@@ -154,12 +157,16 @@ program
         const nodeVersion = process.version;
         console.log(`${chalk.green('✓')} Node.js: ${nodeVersion}`);
 
-        // Check .env file
         try {
             await fs.access('.env');
-            console.log(`${chalk.green('✓')} .env file found`);
+            console.log(`${chalk.green('✓')} .env file found (local)`);
         } catch {
-            console.log(`${chalk.yellow('⚠️ ')} .env file not found (create from .env.example)`);
+            try {
+                await fs.access(getGlobalConfigPath());
+                console.log(`${chalk.green('✓')} .env file found (global)`);
+            } catch {
+                console.log(`${chalk.yellow('⚠️ ')} No .env file found (local or global)`);
+            }
         }
 
         // Check API key
@@ -197,12 +204,42 @@ program
  */
 program
     .command('config')
-    .description('Show current configuration')
-    .action(async () => {
-        const { DEFAULT_CONFIG } = await import('../config/default.js');
-        console.log(chalk.bold('\n⚙️  Current Configuration\n'));
-        console.log(JSON.stringify(DEFAULT_CONFIG, null, 2));
-        console.log('');
+    .description('Manage configuration')
+    .argument('[action]', 'Action (show, set-key)', 'show')
+    .argument('[value]', 'Value for the action')
+    .action(async (action, value) => {
+        if (action === 'set-key') {
+            if (!value) {
+                console.error(chalk.red('Error: API key required'));
+                console.log('Usage: gbh config set-key <your-api-key>');
+                process.exit(1);
+            }
+
+            try {
+                const configPath = getGlobalConfigPath();
+                const configDir = path.dirname(configPath);
+
+                // Ensure directory exists
+                try {
+                    await fs.access(configDir);
+                } catch {
+                    await fs.mkdir(configDir, { recursive: true });
+                }
+
+                // Write key
+                await fs.writeFile(configPath, `GEMINI_API_KEY=${value}\n`);
+                console.log(chalk.green(`\n✓ Global API key saved to ${configPath}`));
+                console.log(chalk.gray('You can now run scans in any directory!'));
+
+            } catch (error) {
+                console.error(chalk.red(`Failed to save config: ${error.message}`));
+            }
+        } else {
+            const { DEFAULT_CONFIG } = await import('../config/default.js');
+            console.log(chalk.bold('\n⚙️  Current Configuration\n'));
+            console.log(JSON.stringify(DEFAULT_CONFIG, null, 2));
+            console.log('');
+        }
     });
 
 /**

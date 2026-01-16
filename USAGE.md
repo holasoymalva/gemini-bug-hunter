@@ -71,12 +71,20 @@ cp .env.example .env
 npm start doctor
 ```
 
-### Method 3: Global Installation (Future)
+### Method 3: Global Installation
 
 ```bash
-# Once published to NPM
+# Install globally
 npm install -g gemini-bug-hunter
+
+# Set your API Key globally (Run once)
+gbh config set-key <YOUR_API_KEY>
+
+# Verify setup
 gbh doctor
+
+# Scan any directory
+gbh scan
 ```
 
 ---

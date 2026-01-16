@@ -1,0 +1,36 @@
+# Source Control
+.git
+.gitignore
+.gitattributes
+
+# Environment & Config
+.env
+.env.*
+.env.example
+config/local.js
+
+# Project/Dev files
+.vscode
+.idea
+.DS_Store
+examples/
+scripts/
+test/
+tests/
+coverage/
+node_modules/
+
+# Documentation (Optional: Keep README/LICENSE, exclude others to save space if desired, but good to include)
+# We will keep main docs
+logo-cli.png
+DIAGRAM.txt
+CHECKLIST.md
+PROJECT_SUMMARY.md
+demo.sh
+setup.sh
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
