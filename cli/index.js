@@ -25,7 +25,7 @@ const program = new Command();
 program
     .name('gbh')
     .description('🛡️  Gemini Bug Hunter - AI-Powered Security Vulnerability Scanner')
-    .version('1.0.0')
+    .version('1.2.0')
     .option('--welcome', 'Show welcome animation')
     .hook('preAction', async (thisCommand, actionCommand) => {
         // Show animation if --welcome flag is used or if running 'doctor'

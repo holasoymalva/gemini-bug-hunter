@@ -56,7 +56,7 @@ async function displayWelcome() {
             console.log(geminiGradient.multiline(data));
 
             // 3. Subtítulo con efecto de tipeo
-            const subtitle = "AI-POWERED SECURITY INTELLIGENCE v1.0";
+            const subtitle = "AI-POWERED SECURITY INTELLIGENCE v1.2";
             await typeEffect(subtitle);
 
             console.log('\n');
