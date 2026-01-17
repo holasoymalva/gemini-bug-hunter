@@ -15,13 +15,15 @@ const db = mysql.createConnection({
     database: 'myapp'
 });
 
-// VULNERABILITY 2: SQL Injection
+// VULNERABILITY 2: SQL Injection - FIXED
 app.get('/user/:id', (req, res) => {
     const userId = req.params.id;
-    const query = `SELECT * FROM users WHERE id = ${userId}`;
-
-    db.query(query, (err, results) => {
-        if (err) throw err;
+    // Using a parameterized query to prevent SQL Injection
+    db.query('SELECT * FROM users WHERE id = ?', [userId], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).send('Internal Server Error');
+        }
         res.json(results);
     });
 });

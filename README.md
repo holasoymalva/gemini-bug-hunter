@@ -111,7 +111,12 @@ gbh scan --output report.json
 
 # JSON output to stdout
 gbh scan --json
+
+# Interactive Auto-Fix Mode
+gbh scan --fix
 ```
+
+> **Note**: The `--fix` option will interactively prompt you to apply AI-generated fixes for each vulnerability found.
 
 ### Check System Health
 
@@ -289,7 +294,7 @@ gemini-bug-hunter/
 
 ## 🔮 Future Roadmap
 
-- [ ] Auto-fix implementation
+- [x] Auto-fix implementation (Interactive Mode)
 - [ ] GitHub Actions integration
 - [ ] CI/CD security gates
 - [ ] PR comment integration

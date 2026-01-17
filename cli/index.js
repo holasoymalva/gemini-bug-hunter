@@ -48,6 +48,7 @@ program
     .argument('[path]', 'Path to scan (file or directory)', '.')
     .option('-o, --output <file>', 'Output report to file')
     .option('--json', 'Output as JSON')
+    .option('--fix', 'Automatically attempt to fix vulnerabilities')
     .action(async (targetPath, options) => {
         const reporter = new ConsoleReporter();
         let spinner;
@@ -127,6 +128,90 @@ program
             if (options.output) {
                 await fs.writeFile(options.output, JSON.stringify(report, null, 2));
                 reporter.displaySuccess(`Report saved to ${options.output}`);
+            }
+
+            // Auto-fix logic
+            if (options.fix && prioritized.length > 0) {
+                const inquirer = (await import('inquirer')).default;
+
+                console.log(chalk.bold('\n🔧 Auto-Fix Mode\n'));
+
+                const answer = await inquirer.prompt([
+                    {
+                        type: 'confirm',
+                        name: 'startFix',
+                        message: `Found ${prioritized.length} vulnerabilities. Start interactive fix process?`,
+                        default: true
+                    }
+                ]);
+
+                if (answer.startFix) {
+                    for (const vuln of prioritized) {
+                        try {
+                            const file = files.find(f => f.relativePath === vuln.file);
+                            if (!file) {
+                                console.log(chalk.yellow(`\n⚠️  Skipping ${vuln.id}: File not found in memory`));
+                                continue;
+                            }
+
+                            // Reload file content to ensure we have latest version (in case of previous edits)
+                            // Ideally we should track offsets but for now we reload
+                            const currentContent = await fs.readFile(file.absolutePath || path.resolve(targetPath, vuln.file), 'utf8');
+
+                            console.log(chalk.dim('─'.repeat(50)));
+                            console.log(chalk.bold(`\nFixing: ${chalk.cyan(vuln.title)}`));
+                            console.log(`File: ${vuln.file}:${vuln.line}`);
+
+                            const severityColor = vuln.severity === 'CRITICAL' ? chalk.red.bold :
+                                vuln.severity === 'HIGH' ? chalk.yellow :
+                                    vuln.severity === 'MEDIUM' ? chalk.blue : chalk.gray;
+                            console.log(`Severity: ${severityColor(vuln.severity)}`);
+
+                            spinner = ora('Generating secure fix...').start();
+                            const fixedCode = await gemini.generateFix(vuln, currentContent);
+                            spinner.stop();
+
+                            if (!fixedCode || fixedCode === currentContent) {
+                                console.log(chalk.yellow('⚠️  Could not generate a valid fix or fix is identical.'));
+                                continue;
+                            }
+
+                            console.log(chalk.bold('\nProposed Change:'));
+                            // Simple diff view could be added here, for now just showing success
+                            console.log(chalk.green('✓ Fix generated successfully'));
+
+                            const apply = await inquirer.prompt([
+                                {
+                                    type: 'confirm',
+                                    name: 'apply',
+                                    message: 'Apply this fix to the file?',
+                                    default: false // Safer default
+                                }
+                            ]);
+
+                            if (apply.apply) {
+                                await fs.writeFile(file.absolutePath || path.resolve(targetPath, vuln.file), fixedCode);
+                                console.log(chalk.green(`✓ Fix applied to ${vuln.file}`));
+
+                                // Update 'files' array in memory for subsequent fixes in same file? 
+                                // Complex: Re-reading file at start of loop is safer.
+                                // But if multiple vulns are in same file, generating fix on *original* content will overwrite previous fixes.
+                                // LIMITATION: Current implementation assumes fixes are atomic or sequential.
+                                // Ideally we should re-scan or handle overlapping edits.
+                            } else {
+                                console.log(chalk.gray('Skipped.'));
+                            }
+
+                        } catch (err) {
+                            if (spinner) spinner.stop();
+                            console.log(chalk.red(`\n✗ Error fixing ${vuln.id}: ${err.message}`));
+                        }
+                    }
+                    console.log(chalk.bold('\n✨ Auto-fix session complete'));
+
+                    // Re-scan recommendation
+                    console.log(chalk.yellow('Tip: Run scan again to verify fixes.'));
+                }
             }
 
             // Exit code based on risk
