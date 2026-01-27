@@ -1,109 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gemini Bug Hunter | AI-Powered Security</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <canvas id="matrix-rain"></canvas>
-    
-    <div id="app">
-      <header class="hero-section">
-        <div class="hero-content">
-          <div class="glitch-wrapper">
-            <h1 class="glitch" data-text="GEMINI BUG HUNTER">GEMINI BUG HUNTER</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemini Bug Hunter | AI-Powered Security</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <canvas id="matrix-rain"></canvas>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">GBH <span class="cursor">_</span></a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">Workflow</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/holasoymalva/gemini-bug-hunter" target="_blank" class="github-link">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="app">
+    <header class="hero-section">
+      <div class="hero-content">
+        <div class="badge">v1.0.0 Public Beta</div>
+        <div class="glitch-wrapper">
+          <h1 class="glitch" data-text="GEMINI BUG HUNTER">GEMINI BUG HUNTER</h1>
+        </div>
+        <p class="subtitle typing-effect">AI-Powered Security Vulnerability Hunter</p>
+        <p class="hero-description">
+          Turn your terminal into an elite security auditing tool.
+          Powered by <strong>Gemini 2.5 Flash</strong> to find, understand, and fix vulnerabilities in seconds.
+        </p>
+        <div class="cta-group">
+          <a href="#install" class="btn btn-primary">Start Hunting</a>
+          <a href="https://github.com/holasoymalva/gemini-bug-hunter" target="_blank" class="btn btn-secondary">View
+            Source</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Bento Grid Features -->
+      <section id="features" class="scroll-trigger">
+        <div class="section-header">
+          <h2>The Intelligence Engine</h2>
+          <div class="line-separator"></div>
+          <p>Security tools shouldn't be black boxes. GBH brings transparency and speed.</p>
+        </div>
+
+        <div class="bento-grid">
+          <div class="bento-card large">
+            <div class="card-icon">🧠</div>
+            <h3>Deep Context Understanding</h3>
+            <p>Unlike regex-based scanners, Gemini reads your code like a senior engineer. It understands control flow,
+              variable context, and business logic to reduce false positives.</p>
           </div>
-          <p class="subtitle typing-effect">AI-Powered Security Vulnerability Hunter</p>
-          <div class="scroll-indicator">
-            <span>SCROLL TO BEGIN</span>
-            <div class="line"></div>
+          <div class="bento-card">
+            <div class="card-icon">⚡️</div>
+            <h3>Lightning Fast</h3>
+            <p>Powered by Gemini 2.5 Flash for near-instant analysis of complex files.</p>
+          </div>
+          <div class="bento-card">
+            <div class="card-icon">🛡️</div>
+            <h3>Auto-Remediation</h3>
+            <p>Don't just find bugs. Fix them. Interactive prompts guide you through safe patches.</p>
+          </div>
+          <div class="bento-card wide">
+            <div class="card-icon">📊</div>
+            <h3>Detailed Risk Scoring</h3>
+            <p>Calculates severity, confidence, and impact to prioritize what truly matters. Get a 0-100% security score
+              for every scan.</p>
           </div>
         </div>
-      </header>
+      </section>
 
-      <main>
-        <section id="vision" class="scroll-trigger">
-          <div class="content-wrapper">
-            <h2>The Problem</h2>
-            <div class="statement fade-in">Security tools are often <span class="highlight">too noisy</span>.</div>
-            <div class="statement fade-in">They are <span class="highlight">too complex</span>.</div>
-            <div class="statement fade-in">And <span class="highlight">too disconnected</span> from your workflow.</div>
+      <!-- Alternating Layout: How it Works -->
+      <section id="how-it-works" class="scroll-trigger">
+        <div class="section-header">
+          <h2>Workflow</h2>
+        </div>
+
+        <div class="step-container">
+          <div class="step-content">
+            <span class="step-number">01</span>
+            <h3>Scan Your Codebase</h3>
+            <p>Run <code>gbh scan</code> in your project root. The tool intelligently maps your file structure, ignoring
+              non-code files, and sanitizes sensitive data before analysis.</p>
           </div>
-        </section>
-
-        <section id="solution" class="scroll-trigger">
-          <div class="content-wrapper">
-            <h2>The Solution</h2>
-            <p class="big-text">Gemini 2.5 Flash as your <span class="highlight">Core Intelligence Engine</span>.</p>
-            <div class="features-grid">
-              <div class="feature-card">
-                <h3>Understand</h3>
-                <p>Deep context awareness of your codebase.</p>
-              </div>
-              <div class="feature-card">
-                <h3>Detect</h3>
-                <p>Pinpoint vulnerabilities with high precision.</p>
-              </div>
-              <div class="feature-card">
-                <h3>Fix</h3>
-                <p>Auto-remediation with safe, explained patches.</p>
+          <div class="step-visual">
+            <div class="terminal-mockup">
+              <div class="term-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="term-body">
+                <span class="accent">$</span> gbh scan ./src<br>
+                <span class="dim">Mapping files...</span><br>
+                <span class="success">✓ Found 14 analyzeable files</span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <section id="terminal-demo" class="scroll-trigger">
-          <div class="content-wrapper">
-            <h2>Live Terminal</h2>
-            <div class="terminal-window">
-              <div class="terminal-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-              </div>
-              <div class="terminal-body">
-                <div class="command-line">
-                  <span class="prompt">$</span> <span class="cmd">gbh scan</span>
-                </div>
-                <div class="output">
-                  <span class="info">🛡️  GEMINI BUG HUNTER REPORT</span><br>
-                  <br>
-                  <span class="success">📊 Risk Assessment</span><br>
-                  &nbsp;&nbsp;Risk Score: 81% ██████████<br>
-                  &nbsp;&nbsp;Risk Level: <span class="danger">HIGH</span><br>
-                  <br>
-                  <span class="warning">Found 3 vulnerabilities.</span>
-                </div>
+        <div class="step-container reverse">
+          <div class="step-content">
+            <span class="step-number">02</span>
+            <h3>Review the Report</h3>
+            <p>Receive a structured, easy-to-read report in your terminal. Vulnerabilities are categorized by severity
+              (Critical, High, Medium, Low) with clear explanations.</p>
+          </div>
+          <div class="step-visual">
+            <div class="terminal-mockup">
+              <div class="term-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="term-body">
+                <span class="danger">CRITICAL</span> SQL Injection found in <code>auth.js</code><br>
+                <span class="dim">Line 42: User input used directly in query.</span><br>
+                <span class="info">Confidence: 98%</span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <section id="install" class="scroll-trigger">
-          <div class="content-wrapper">
-            <h2>Get Started</h2>
+        <div class="step-container">
+          <div class="step-content">
+            <span class="step-number">03</span>
+            <h3>Apply Fixes</h3>
+            <p>Use the interactive mode to apply AI-generated patches. Review the diff, confirm the change, and watch
+              your code improve instantly.</p>
+          </div>
+          <div class="step-visual">
+            <div class="terminal-mockup">
+              <div class="term-header"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+              <div class="term-body">
+                <span class="accent">?</span> Apply fix for Vulnerability #1?<br>
+                <span class="accent">❯ Yes</span><br>
+                <span class="dim">Applying patch...</span><br>
+                <span class="success">✓ Vulnerability resolved.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="scroll-trigger text-center">
+        <div class="content-wrapper">
+          <h2>Ready to Hunt?</h2>
+          <div class="install-card">
             <div class="code-block">
-              <span class="comment"># Global Install</span><br>
-              <span class="cmd">npm install -g gemini-bug-hunter</span>
+              <span class="comment"># Install globally via npm</span><br>
+              <div class="copy-row">
+                <span class="cmd">npm install -g gemini-bug-hunter</span>
+                <button class="copy-btn" aria-label="Copy command">⎘</button>
+              </div>
             </div>
             <div class="code-block">
-              <span class="comment"># Set API Key</span><br>
-              <span class="cmd">gbh config set-key &lt;YOUR_API_KEY&gt;</span>
+              <span class="comment"># Configure your API key</span><br>
+              <div class="copy-row">
+                <span class="cmd">gbh config set-key &lt;YOUR_API_KEY&gt;</span>
+              </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+    </main>
 
-      <footer>
-        <p>Made with <span class="heart">❤️</span> by <a href="https://github.com/holasoymalva" target="_blank">@holasoymalva</a></p>
-        <p><a href="https://github.com/holasoymalva/gemini-bug-hunter" target="_blank">View on GitHub</a></p>
-      </footer>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <h4>Gemini Bug Hunter</h4>
+          <p>An open-source security initiative.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Links</h4>
+          <a href="https://github.com/holasoymalva/gemini-bug-hunter">GitHub</a>
+          <a href="https://github.com/holasoymalva/gemini-bug-hunter/issues">Report an Issue</a>
+          <a href="#">Documentation</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://github.com/holasoymalva">@holasoymalva</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MIT License © 2026</p>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>

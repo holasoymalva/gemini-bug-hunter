@@ -107,11 +107,6 @@ const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-
-      // If it's the vision section, trigger the staggered text reveal
-      if (entry.target.id === 'vision') {
-        revealStatements(entry.target);
-      }
     }
   });
 }, observerOptions);
@@ -120,15 +115,19 @@ document.querySelectorAll('section').forEach(section => {
   observer.observe(section);
 });
 
-// 2. Staggered Text Reveal Logic
-function revealStatements(section) {
-  const statements = section.querySelectorAll('.statement');
-  statements.forEach((el, index) => {
-    setTimeout(() => {
-      el.classList.add('visible');
-    }, index * 800 + 500); // Staggered delay
+// 2. Copy to Clipboard
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const code = btn.previousElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const originalText = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => {
+        btn.textContent = originalText;
+      }, 2000);
+    });
   });
-}
+});
 
 // 3. Typing Effect Reset on Hero Entry (Optional but nice)
 // We handled this with CSS animation mainly, but JS could restart it if needed.
