@@ -1,0 +1,418 @@
+:root {
+  --font-main: 'Fira Code', monospace;
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-accent: #ffffff;
+  /* White accent */
+  --color-accent-dim: #cccccc;
+  --color-gray: #333333;
+  --color-light-gray: #888888;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+#matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  /* Subtle background */
+}
+
+#app {
+  position: relative;
+  z-index: 1;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Hero Section */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+h1.glitch {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -2px;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* Glitch Effect */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(13px, 9999px, 86px, 0);
+  }
+
+  20% {
+    clip: rect(86px, 9999px, 14px, 0);
+  }
+
+  40% {
+    clip: rect(24px, 9999px, 137px, 0);
+  }
+
+  60% {
+    clip: rect(5px, 9999px, 83px, 0);
+  }
+
+  80% {
+    clip: rect(109px, 9999px, 59px, 0);
+  }
+
+  100% {
+    clip: rect(38px, 9999px, 57px, 0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(122px, 9999px, 6px, 0);
+  }
+
+  20% {
+    clip: rect(2px, 9999px, 11px, 0);
+  }
+
+  40% {
+    clip: rect(142px, 9999px, 13px, 0);
+  }
+
+  60% {
+    clip: rect(54px, 9999px, 83px, 0);
+  }
+
+  80% {
+    clip: rect(21px, 9999px, 11px, 0);
+  }
+
+  100% {
+    clip: rect(78px, 9999px, 51px, 0);
+  }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--color-light-gray);
+  margin-bottom: 2rem;
+  border-right: 2px solid var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: var(--color-text);
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 40px;
+  background: var(--color-text);
+  margin-top: 10px;
+  animation: scroll-line 1.5s infinite;
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  51% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* Main Content */
+main section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+main section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+/* Vision Section */
+.statement {
+  font-size: 2rem;
+  margin: 1.5rem 0;
+  opacity: 0;
+  /* Hidden by default for JS reveal */
+  transition: opacity 0.8s ease 0.2s;
+}
+
+.statement.visible {
+  opacity: 1;
+}
+
+.highlight {
+  background: white;
+  color: black;
+  padding: 0 5px;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-card {
+  border: 1px solid var(--color-gray);
+  padding: 2rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-text);
+}
+
+.feature-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.feature-card p {
+  color: var(--color-light-gray);
+  font-size: 0.9rem;
+}
+
+/* Terminal Window */
+.terminal-window {
+  background: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.terminal-header {
+  background: #2d2d2d;
+  padding: 10px 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.red {
+  background: #ff5f56;
+}
+
+.yellow {
+  background: #ffbd2e;
+}
+
+.green {
+  background: #27c93f;
+}
+
+.terminal-body {
+  padding: 20px;
+  color: #cccccc;
+}
+
+.command-line {
+  margin-bottom: 15px;
+}
+
+.prompt {
+  color: #27c93f;
+  margin-right: 10px;
+}
+
+.cmd {
+  color: #ffffff;
+}
+
+.output {
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.success {
+  color: #27c93f;
+}
+
+.warning {
+  color: #ffbd2e;
+}
+
+.danger {
+  color: #ff5f56;
+}
+
+.info {
+  color: #4facfe;
+}
+
+/* Install Section */
+.code-block {
+  background: #111;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  border-left: 3px solid var(--color-text);
+  text-align: left;
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+}
+
+.comment {
+  color: #666;
+  font-style: italic;
+}
+
+Footer {
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid var(--color-gray);
+  color: var(--color-light-gray);
+  font-size: 0.8rem;
+}
+
+.heart {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  h1.glitch {
+    font-size: 2.5rem;
+  }
+
+  .statement {
+    font-size: 1.5rem;
+  }
+}
