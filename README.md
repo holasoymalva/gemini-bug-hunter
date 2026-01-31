@@ -7,7 +7,7 @@
   ### AI-Powered Security Vulnerability Hunter (CLI)
 </div>
 
-> **Gemini Bug Hunter** is an AI-first CLI tool that helps developers **find, understand, and fix security vulnerabilities** in their codebases using **Gemini 2.5 Flash (Next Gen) as the core intelligence engine**.
+> **Gemini Bug Hunter** is an AI-first CLI tool that helps developers **find, understand, and fix security vulnerabilities** in their codebases using **Gemini 2.5 and Gemini 3 (Next Gen) as the core intelligence engine**.
 
 Inspired by tools like **Gemini-CLI** and **Claude-Code**, Gemini Bug Hunter brings **ethical hacking and AppSec workflows** directly into the developer terminal.
 
@@ -21,7 +21,7 @@ Security tools are often:
 * Too complex
 * Too disconnected from developer workflows
 
-**Gemini Bug Hunter** solves this by using **Gemini 2.5 (Next Gen) as the main reasoning engine** to:
+**Gemini Bug Hunter** solves this by using **Gemini 2.5 and Gemini 3 (Next Gen) as the main reasoning engine** to:
 
 * Understand code context
 * Detect vulnerabilities
@@ -43,7 +43,7 @@ All vulnerability analysis, risk reasoning, and fix generation are driven by Gem
 
 * **Node.js** (v18+)
 * **JavaScript (ES2022+)**
-* **Gemini 2.5 Flash** (Next Gen Analysis Engine)
+* **Gemini 2.5 Flash and Gemini 3** (Next Gen Analysis Engine)
 * **Premium CLI Experience** (ASCII Art, Animations, Gradients)
 * CLI Framework: `commander`
 * Output Styling: `chalk`, `cli-table3`, `boxen`
@@ -150,7 +150,7 @@ gbh explain "XSS"
 
 ---
 
-## 🤖 Gemini 2.5 Integration
+## 🤖 Gemini 2.5-3 Integration
 
 ### System Prompt
 
@@ -320,7 +320,7 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## 🙏 Acknowledgments
 
-- Powered by **Google Gemini 2.5 Flash**
+- Powered by **Google Gemini 2.5 and Gemini 3 Flash**
 - Inspired by **OWASP Top 10**
 - Built for the developer community
 
