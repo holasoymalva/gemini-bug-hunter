@@ -150,7 +150,7 @@ gbh explain "XSS"
 
 ---
 
-## 🤖 Gemini 2.5-3 Integration
+## 🤖 Gemini 3 Integration
 
 ### System Prompt
 
